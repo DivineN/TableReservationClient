@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Tables</title>
+        <link rel="stylesheet" href="styles.css" />
+    </h:head>
+    <h:body>
+        <nav>
+            <div class="logo">
+                <h4>TABLE RESERVATION SYSTEM</h4>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="reservations.xhtml">RESERVATIONS</a></li>
+                <li><a href="reserve.xhtml">RESERVE A TABLE</a></li>
+                <li><a href="tables.xhtml">TABLES</a></li>
+            </ul>
+        </nav>
+        <h:form id="table-frm">
+            <p:commandButton value="Create Table" action="#{bb.createTable()}" update="tables-data" icon="pi pi-check"/>
+        </h:form>
+        <p:dataTable value="${bb.allTables}" var="table" id="tables-data" class="content-table">
+                <p:column>
+                    <f:facet name="header">Table No</f:facet>
+                    ${table.tableNo}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Reservation Status</f:facet>
+                    <p:outputLabel value="RESERVED" rendered="${table.isReserved}"/>
+                    <p:outputLabel value="VACANT" rendered="${not table.isReserved}"/>
+                </p:column>
+        </p:dataTable>
+        <div class="footer">
+            <p>© DIVINE 2022.</p>
+        </div>
+    </h:body>
+</html>
